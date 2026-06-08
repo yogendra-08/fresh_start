@@ -1,0 +1,139 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Happy Birthday ❤️</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/intro.css">
+  <link rel="stylesheet" href="css/letters.css">
+  <link rel="stylesheet" href="css/book.css">
+  <link rel="stylesheet" href="css/ending.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+
+<body>
+
+  <!-- PRELOADER -->
+  <div id="preloader">
+    <div class="loader-content">
+      <h1>Loading Memories...</h1>
+
+      <div class="loader-bar">
+        <div class="loader-progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MUSIC PLAYER -->
+  <div id="music-player">
+    <button id="music-toggle">
+      🎵
+    </button>
+  </div>
+
+  <!-- INTRO SECTION -->
+  <section id="intro-section">
+
+    <!-- PARTICLE CANVAS -->
+    <canvas id="intro-canvas"></canvas>
+
+    <div class="intro-content">
+
+      <h1 id="main-title">
+        <span id="typed-text"></span>
+      </h1>
+
+      <button id="enter-btn">
+        Enter
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- LETTERS SECTION -->
+  <section id="letters-section">
+
+    <h2 class="section-title">
+      Our Memories
+    </h2>
+
+    <div id="letters-grid"></div>
+
+    <button id="open-book-btn">
+      Open The Book →
+    </button>
+
+  </section>
+
+  <!-- LETTER MODAL -->
+  <div id="letter-modal"></div>
+
+  <!-- BOOK CONTAINER -->
+  <div id="book-container">
+
+    <button id="book-close">✕</button>
+
+    <div id="book"></div>
+
+  </div>
+
+  <!-- ENDING SECTION -->
+  <section id="ending-section">
+
+    <canvas id="ending-canvas"></canvas>
+
+    <div class="ending-content">
+
+      <p class="ending-line1"></p>
+
+      <p class="ending-line2"></p>
+
+      <h1 class="birthday-text">
+        HAPPY BIRTHDAY ❤️
+      </h1>
+
+    </div>
+
+    <div id="hearts-container"></div>
+
+  </section>
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <!-- ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Typed.js -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+  <!-- Lenis -->
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+
+  <!-- StPageFlip -->
+  <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
+
+  <!-- MAIN JS -->
+  <script type="module" src="js/main.js"></script>
+
+</body>
+</html>
+```

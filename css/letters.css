@@ -1,0 +1,374 @@
+```css id="v8t2nk"
+/* =========================
+   LETTERS SECTION
+========================= */
+
+#letters-section {
+  min-height: 100vh;
+
+  padding:
+    120px 8vw;
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(255, 77, 141, 0.08),
+      transparent 35%
+    ),
+    #0f0f0f;
+
+  position: relative;
+
+  overflow: hidden;
+
+  display: none;
+}
+
+/* =========================
+   LETTER GRID
+========================= */
+
+#letters-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(180px, 1fr)
+    );
+
+  gap: 28px;
+
+  position: relative;
+
+  z-index: 2;
+}
+
+/* =========================
+   LETTER CARD
+========================= */
+
+.letter-card {
+  position: relative;
+
+  min-height: 220px;
+
+  padding: 24px;
+
+  border-radius: 24px;
+
+  background:
+    rgba(255,255,255,0.04);
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(18px);
+
+  overflow: hidden;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.5s ease,
+    box-shadow 0.5s ease,
+    border 0.5s ease;
+
+  will-change: transform;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  box-shadow:
+    0 4px 30px rgba(0,0,0,0.2);
+}
+
+/* =========================
+   LETTER GLOW EFFECT
+========================= */
+
+.letter-card::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.08),
+      transparent
+    );
+
+  opacity: 0;
+
+  transition: 0.5s ease;
+}
+
+/* =========================
+   HOVER EFFECT
+========================= */
+
+.letter-card:hover {
+
+  transform:
+    translateY(-12px)
+    scale(1.03)
+    rotate(0deg) !important;
+
+  border:
+    1px solid rgba(255, 77, 141, 0.45);
+
+  box-shadow:
+    0 0 25px rgba(255, 77, 141, 0.22),
+    0 0 60px rgba(255, 77, 141, 0.1);
+}
+
+.letter-card:hover::before {
+  opacity: 1;
+}
+
+/* =========================
+   CARD ICON
+========================= */
+
+.card-icon {
+  font-size: 2.5rem;
+
+  margin-bottom: 15px;
+
+  filter:
+    drop-shadow(
+      0 0 10px rgba(255,255,255,0.2)
+    );
+}
+
+/* =========================
+   CARD LABEL
+========================= */
+
+.card-label {
+  font-size: 1rem;
+
+  font-weight: 500;
+
+  line-height: 1.5;
+
+  color: white;
+
+  letter-spacing: 0.5px;
+}
+
+/* =========================
+   CARD NUMBER
+========================= */
+
+.card-number {
+  position: absolute;
+
+  bottom: 18px;
+  right: 22px;
+
+  font-size: 0.85rem;
+
+  color:
+    rgba(255,255,255,0.3);
+
+  font-weight: 600;
+
+  letter-spacing: 1px;
+}
+
+/* =========================
+   FLOATING ANIMATION
+========================= */
+
+@keyframes floatingCard {
+
+  0% {
+    transform:
+      translateY(0px);
+  }
+
+  50% {
+    transform:
+      translateY(-10px);
+  }
+
+  100% {
+    transform:
+      translateY(0px);
+  }
+
+}
+
+.letter-card {
+  animation:
+    floatingCard 5s ease-in-out infinite;
+}
+
+/* =========================
+   RANDOM ANIMATION DELAY
+========================= */
+
+.letter-card:nth-child(2n) {
+  animation-delay: 1s;
+}
+
+.letter-card:nth-child(3n) {
+  animation-delay: 2s;
+}
+
+.letter-card:nth-child(4n) {
+  animation-delay: 3s;
+}
+
+/* =========================
+   OPEN BOOK BUTTON
+========================= */
+
+#open-book-btn {
+  margin:
+    80px auto 0;
+
+  display: block;
+
+  padding:
+    18px 42px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255, 77, 141, 0.12);
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+  color: white;
+
+  font-family:
+    var(--font-heading);
+
+  font-size:
+    1.7rem;
+
+  backdrop-filter:
+    blur(14px);
+
+  box-shadow:
+    0 0 25px rgba(255,77,141,0.18);
+
+  transition:
+    all 0.4s ease;
+}
+
+/* BUTTON HOVER */
+
+#open-book-btn:hover {
+
+  transform:
+    scale(1.08);
+
+  box-shadow:
+    0 0 40px rgba(255,77,141,0.35);
+
+  background:
+    rgba(255,77,141,0.18);
+}
+
+/* =========================
+   BACKGROUND BLURS
+========================= */
+
+#letters-section::before {
+  content: "";
+
+  position: absolute;
+
+  width: 400px;
+  height: 400px;
+
+  background:
+    rgba(255,77,141,0.08);
+
+  border-radius: 50%;
+
+  filter: blur(120px);
+
+  top: 10%;
+  left: -10%;
+
+  z-index: 0;
+}
+
+#letters-section::after {
+  content: "";
+
+  position: absolute;
+
+  width: 300px;
+  height: 300px;
+
+  background:
+    rgba(255,255,255,0.03);
+
+  border-radius: 50%;
+
+  filter: blur(100px);
+
+  bottom: 5%;
+  right: -5%;
+
+  z-index: 0;
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+  #letters-section {
+    padding:
+      100px 20px;
+  }
+
+  #letters-grid {
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    gap: 18px;
+  }
+
+  .letter-card {
+
+    min-height: 180px;
+
+    padding: 18px;
+
+    border-radius: 20px;
+  }
+
+  .card-icon {
+    font-size: 2rem;
+  }
+
+  .card-label {
+    font-size: 0.9rem;
+  }
+
+  #open-book-btn {
+
+    font-size: 1.4rem;
+
+    padding:
+      15px 30px;
+  }
+
+}
+```
