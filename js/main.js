@@ -1,22 +1,3 @@
-```javascript id="m3q9la"
-// ===============================
-// LENIS SMOOTH SCROLL
-// ===============================
-
-const lenis = new Lenis({
-  duration: 1.2,
-  smoothWheel: true,
-  smoothTouch: false,
-});
-
-function raf(time) {
-  lenis.raf(time);
-
-  requestAnimationFrame(raf);
-}
-
-requestAnimationFrame(raf);
-
 // ===============================
 // GSAP REGISTER
 // ===============================
@@ -28,13 +9,18 @@ gsap.registerPlugin(ScrollTrigger);
 // ===============================
 
 document.addEventListener("DOMContentLoaded", () => {
+    initPreloader();
+    initTypedText();
+    initEnterButton();
+    initMusicPlayer();
 
-  initPreloader();
-
-  initTypedText();
-
-  initEnterButton();
-
+    // Intro entrance animation
+    gsap.from(".intro-content", {
+        opacity: 0,
+        y: 50,
+        duration: 1.5,
+        ease: "power3.out"
+    });
 });
 
 // ===============================
@@ -42,27 +28,22 @@ document.addEventListener("DOMContentLoaded", () => {
 // ===============================
 
 function initPreloader() {
-
-  gsap.to(".loader-progress", {
-    width: "100%",
-    duration: 2.5,
-    ease: "power2.inOut"
-  });
-
-  setTimeout(() => {
-
-    gsap.to("#preloader", {
-      opacity: 0,
-      duration: 1,
-      ease: "power2.out",
-
-      onComplete: () => {
-        document.getElementById("preloader").style.display = "none";
-      }
+    gsap.to(".loader-progress", {
+        width: "100%",
+        duration: 2.5,
+        ease: "power2.inOut"
     });
 
-  }, 2800);
-
+    setTimeout(() => {
+        gsap.to("#preloader", {
+            opacity: 0,
+            duration: 1,
+            ease: "power2.out",
+            onComplete: () => {
+                document.getElementById("preloader").style.display = "none";
+            }
+        });
+    }, 2800);
 }
 
 // ===============================
@@ -70,25 +51,16 @@ function initPreloader() {
 // ===============================
 
 function initTypedText() {
-
-  new Typed("#typed-text", {
-
-    strings: [
-      "I made something for you..."
-    ],
-
-    typeSpeed: 55,
-
-    backSpeed: 0,
-
-    startDelay: 600,
-
-    showCursor: true,
-
-    loop: false,
-
-  });
-
+    new Typed("#typed-text", {
+        strings: [
+            "I made something for you..."
+        ],
+        typeSpeed: 55,
+        backSpeed: 0,
+        startDelay: 600,
+        showCursor: true,
+        loop: false
+    });
 }
 
 // ===============================
@@ -96,45 +68,35 @@ function initTypedText() {
 // ===============================
 
 function initEnterButton() {
+    const enterBtn = document.getElementById("enter-btn");
 
-  const enterBtn = document.getElementById("enter-btn");
+    if (!enterBtn) return;
 
-  enterBtn.addEventListener("click", () => {
+    enterBtn.addEventListener("click", () => {
 
-    const timeline = gsap.timeline();
+        const timeline = gsap.timeline();
 
-    timeline.to(".intro-content", {
+        timeline.to(".intro-content", {
+            opacity: 0,
+            y: -40,
+            duration: 1,
+            ease: "power3.inOut"
+        });
 
-      opacity: 0,
+        timeline.to("#intro-section", {
+            opacity: 0,
+            duration: 1,
+            ease: "power2.inOut",
 
-      y: -40,
+            onComplete: () => {
+                document.getElementById("intro-section").style.display = "none";
 
-      duration: 1,
+                showLettersSection();
+            }
 
-      ease: "power3.inOut"
+        }, "-=0.6");
 
     });
-
-    timeline.to("#intro-section", {
-
-      opacity: 0,
-
-      duration: 1,
-
-      ease: "power2.inOut",
-
-      onComplete: () => {
-
-        document.getElementById("intro-section").style.display = "none";
-
-        showLettersSection();
-
-      }
-
-    }, "-=0.6");
-
-  });
-
 }
 
 // ===============================
@@ -143,95 +105,73 @@ function initEnterButton() {
 
 function showLettersSection() {
 
-  const lettersSection = document.getElementById("letters-section");
+    const lettersSection = document.getElementById("letters-section");
 
-  gsap.set(lettersSection, {
-    display: "block",
-    opacity: 0,
-    y: 80
-  });
+    if (!lettersSection) return;
 
-  gsap.to(lettersSection, {
+    gsap.set(lettersSection, {
+        display: "block",
+        opacity: 0,
+        y: 80
+    });
 
-    opacity: 1,
-
-    y: 0,
-
-    duration: 1.4,
-
-    ease: "power3.out"
-
-  });
-
+    gsap.to(lettersSection, {
+        opacity: 1,
+        y: 0,
+        duration: 1.4,
+        ease: "power3.out"
+    });
 }
 
 // ===============================
 // MUSIC PLAYER
 // ===============================
 
-const musicButton = document.getElementById("music-toggle");
+function initMusicPlayer() {
 
-const backgroundMusic = new Audio(
-  "assets/audio/background.mp3"
-);
+    const musicButton = document.getElementById("music-toggle");
 
-backgroundMusic.loop = true;
+    if (!musicButton) return;
 
-backgroundMusic.volume = 0.4;
+    const backgroundMusic = new Audio(
+        "assets/audio/background.mp3"
+    );
 
-let isPlaying = false;
+    backgroundMusic.loop = true;
+    backgroundMusic.volume = 0.4;
 
-musicButton.addEventListener("click", () => {
+    let isPlaying = false;
 
-  if (!isPlaying) {
+    musicButton.addEventListener("click", () => {
 
-    backgroundMusic.play();
+        if (!isPlaying) {
 
-    musicButton.innerHTML = "⏸";
+            backgroundMusic.play().catch(err => {
+                console.log("Music blocked:", err);
+            });
 
-    gsap.to(musicButton, {
+            musicButton.innerHTML = "⏸";
 
-      scale: 1.1,
+            gsap.to(musicButton, {
+                scale: 1.1,
+                repeat: -1,
+                yoyo: true,
+                duration: 1
+            });
 
-      repeat: -1,
+        } else {
 
-      yoyo: true,
+            backgroundMusic.pause();
 
-      duration: 1
+            musicButton.innerHTML = "🎵";
 
+            gsap.killTweensOf(musicButton);
+
+            gsap.to(musicButton, {
+                scale: 1
+            });
+        }
+
+        isPlaying = !isPlaying;
     });
-
-  } else {
-
-    backgroundMusic.pause();
-
-    musicButton.innerHTML = "🎵";
-
-    gsap.killTweensOf(musicButton);
-
-    gsap.to(musicButton, {
-      scale: 1
-    });
-
-  }
-
-  isPlaying = !isPlaying;
-
-});
-
-// ===============================
-// INTRO ENTRANCE ANIMATION
-// ===============================
-
-gsap.from(".intro-content", {
-
-  opacity: 0,
-
-  y: 50,
-
-  duration: 1.5,
-
-  ease: "power3.out"
-
-});
-```
+}
